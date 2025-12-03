@@ -1,0 +1,27 @@
+.module {
+  height: 100vh; /* PostCSS 會把它改寫 */
+}
+
+@supports (-webkit-touch-callout: none) {
+
+  .module {
+    height: -webkit-fill-available;
+  }
+}
+
+.module__item:nth-child(odd) {
+  background: #fff;
+  color: #F73859;
+}
+
+.module__item:nth-child(even) {
+  background: #F73859;
+  color: #F1D08A;
+}
+
+.module__item {
+  height: 20%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

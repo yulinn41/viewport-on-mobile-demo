@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <title>Page 2 — JS 修正法</title>
+
+  <style>
+    body { margin: 0; background: #333; font-family: sans-serif; }
+
+    .module {
+      height: 100vh;
+      height: calc(var(--vh, 1vh) * 100);
+      margin: 0 auto;
+      max-width: 30%;
+    }
+
+    .module__item {
+      height: 20%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .module__item:nth-child(odd) { background: #fff; color: #F73859; }
+    .module__item:nth-child(even) { background: #F73859; color: #F1D08A; }
+
+    .nav {
+      text-align: center;
+      margin: 20px;
+    }
+    .nav a {
+      margin: 0 10px;
+      font-size: 18px;
+      color: #fff;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="module">
+  <div class="module__item">20%</div>
+  <div class="module__item">40%</div>
+  <div class="module__item">60%</div>
+  <div class="module__item">80%</div>
+  <div class="module__item">100%</div>
+</div>
+
+<div class="nav">
+  <a href="index.html">Home</a>
+  <a href="page1-100vh.html">← Prev</a>
+  <a href="page3-postcss.html">Next →</a>
+</div>
+
+<script>
+  function setVh() {
+    let vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty('--vh', `${vh}px`);
+  }
+  setVh();
+    // We listen to the resize event
+    window.addEventListener('resize', () => {
+      // We execute the same script as before
+      let vh = window.innerHeight * 0.01;
+      document.documentElement.style.setProperty('--vh', `${vh}px`);
+    });
+  </script>
+
+</body>
+
+</html>

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <title>Viewport Height Demo Index</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 40px;
+      line-height: 1.7;
+      max-width: 900px;
+      margin: auto;
+    }
+    h1, h2, h3 {
+      margin-top: 40px;
+    }
+    pre {
+      background: #f4f4f4;
+      padding: 10px;
+      border-radius: 6px;
+      overflow-x: auto;
+    }
+    a {
+      color: #0066cc;
+      text-decoration: underline;
+    }
+    .demo-links a {
+      display: block;
+      margin: 8px 0;
+      font-size: 18px;
+    }
+    code {
+      background: #eee;
+      padding: 2px 4px;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>Viewport Height Demo（100vh on Mobile）</h1>
+
+  <p>
+    這個專案示範了在手機瀏覽器（特別是 iOS Safari）使用
+    <code>100vh</code>
+    時，可能遇到的高度錯誤與三種修正方式的比較。
+  </p>
+
+  <h2>🔗 Demo 頁面連結</h2>
+
+  <div class="demo-links">
+    <a href="page1-100vh.html">Page 1 — 純 100vh（無修正）</a>
+    <a href="page2-js.html">Page 2 — JS 修正法（CSS Custom Property）</a>
+    <a href="page3-postcss.html">Page 3 — PostCSS 修正版（postcss-100vh-fix）</a>
+  </div>
+
+  <hr>
+
+  <h2>📄 Demo 說明</h2>
+
+  <h3>1️⃣ Page 1 — 純 100vh（無修正）</h3>
+  <ul>
+    <li>未做任何處理</li>
+    <li>iOS Safari 會因為工具列高度變動導致內容被遮住或高度不正確</li>
+  </ul>
+
+  <p>檔案：<code>public/page1-100vh.html</code></p>
+
+  <h3>2️⃣ Page 2 — JS 修正法（CSS Custom Property）</h3>
+  <ul>
+    <li>使用 <code>window.innerHeight * 0.01</code> 取得可視高度</li>
+    <li>寫入到 <code>--vh</code> CSS 變數中</li>
+    <li>使用 <code>calc(var(--vh) * 100)</code> 替代 <code>100vh</code></li>
+    <li>可動態修正工具列顯示/消失造成的高度變化</li>
+  </ul>
+
+  <p>檔案：<code>public/page2-js.html</code></p>
+
+  <h3>3️⃣ Page 3 — PostCSS 修正版（postcss-100vh-fix）</h3>
+  <ul>
+    <li>使用 PostCSS 插件自動將 <code>height: 100vh</code> 轉換為更安全的寫法：</li>
+  </ul>
+
+<pre><code>height: -webkit-fill-available;
+height: 100vh;
+</code></pre>
+
+  <p>檔案：<code>public/page3-postcss.html</code></p>
+  <p>自動產生 CSS：<code>public/styles-postcss.css</code></p>
+
+  <hr>
+
+  <h2>🔧 PostCSS Build 流程（重要）</h2>
+
+  <p>
+    每次修改 <code>src/styles.css</code> 後，<strong>一定要重新執行：</strong>
+  </p>
+
+<pre><code>npx postcss src/styles.css -o public/styles-postcss.css
+</code></pre>
+
+  <p>這會重新產生 Page 3 所使用的 CSS。GitHub Pages 不會自動跑 PostCSS，你必須先手動 build 一次。</p>
+
+  <h3>若想更方便，可以加入 npm script：</h3>
+
+<pre><code>{
+  "scripts": {
+    "build:css": "postcss src/styles.css -o public/styles-postcss.css"
+  }
+}
+</code></pre>
+
+  <p>之後只要：</p>
+
+<pre><code>npm run build:css
+</code></pre>
+
+  <hr>
+
+  <h2>📁 專案結構</h2>
+
+<pre><code>project/
+ ├── public/                     
+ │    ├── index.html  
+ │    ├── page1-100vh.html
+ │    ├── page2-js.html 
+ │    ├── page3-postcss.html
+ │    ├── styles-postcss.css     ← build 結果
+ │
+ ├── src/
+ │    ├── styles.css             ← 來源，會被 PostCSS 處理
+ │
+ ├── postcss.config.js
+ ├── package.json
+</code></pre>
+
+  <hr>
+
+  <h2>🚀 GitHub Pages</h2>
+
+  <p>上傳時只需要上傳 <code>public/</code> 裡面的檔案即可。</p>
+
+  <p>然後在 GitHub → Repository → Settings → Pages 設定：</p>
+  <ul>
+    <li>Source：Deploy from a branch</li>
+    <li>Branch：main</li>
+    <li>Folder：root（如果 public 已被移到根）</li>
+  </ul>
+
+  <p>你的網站會自動出現，例如：</p>
+
+<pre><code>https://YOUR_NAME.github.io/viewport-demo/
+</code></pre>
+
+  <hr>
+
+  <h2>👍 研究目的</h2>
+  <p>本專案用於研究 <code>100vh</code> 在手機端的跨瀏覽器差異與修正方法。</p>
+
+</body>
+</html>
