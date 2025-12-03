@@ -1,41 +1,75 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
-  <meta charset="UTF-8">
-  <title>Page 3 — PostCSS 修正版</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Page 3 - PostCSS 100vh Fix Demo</title>
 
+  <!-- 連結編譯後的 PostCSS CSS -->
   <link rel="stylesheet" href="styles-postcss.css">
 
+  <!-- Debug 面板 CSS -->
   <style>
-    body { margin: 0; background: #333; font-family: sans-serif; }
-
-    .nav {
-      text-align: center;
-      margin: 20px;
-    }
-    .nav a {
-      margin: 0 10px;
-      font-size: 18px;
-      color: #fff;
-      text-decoration: underline;
+    #debug-panel {
+      position: fixed;
+      top: 12px;
+      left: 12px;
+      background: rgba(0, 0, 0, 0.75);
+      color: #00ff88;
+      padding: 12px;
+      font-size: 12px;
+      line-height: 1.4;
+      border-radius: 6px;
+      z-index: 9999;
+      max-width: 80vw;
+      white-space: nowrap;
     }
   </style>
 </head>
 
 <body>
 
-<div class="module">
-  <div class="module__item">20%</div>
-  <div class="module__item">40%</div>
-  <div class="module__item">60%</div>
-  <div class="module__item">80%</div>
-  <div class="module__item">100%</div>
-</div>
+  <!-- Debug 面板 -->
+  <div id="debug-panel"></div>
 
-<div class="nav">
-  <a href="index.html">Home</a>
-  <a href="page2-js.html">← Prev</a>
-</div>
+  <!-- 導覽按鈕 -->
+  <nav style="position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); z-index: 100;">
+    <a href="index.html">Home</a> |
+    <a href="page2-js.html">Prev</a>
+  </nav>
+
+  <!-- Demo 主體 -->
+  <div class="module">
+
+    <div class="module__item">20%</div>
+    <div class="module__item">40%</div>
+    <div class="module__item">60%</div>
+    <div class="module__item">80%</div>
+    <div class="module__item">100%</div>
+
+  </div>
+
+  <!-- Debug Script -->
+  <script>
+    function updateDebug() {
+      const panel = document.getElementById("debug-panel");
+
+      const moduleEl = document.querySelector('.module');
+
+      panel.innerHTML = `
+        <div><b>Safari Debug Info</b></div>
+        <div>innerHeight: ${window.innerHeight}px</div>
+        <div>clientHeight: ${document.documentElement.clientHeight}px</div>
+        <div>screen.height: ${screen.height}px</div>
+        <div>screen.availHeight: ${screen.availHeight}px</div>
+        <div>module.offsetHeight: ${moduleEl ? moduleEl.offsetHeight : 'N/A'}px</div>
+        <div>viewport meta: ${document.querySelector('meta[name=viewport]')?.content}</div>
+      `;
+    }
+
+    updateDebug();
+    window.addEventListener("resize", updateDebug);
+  </script>
 
 </body>
 </html>
