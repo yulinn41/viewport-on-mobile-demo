@@ -1,4 +1,4 @@
-hhtml, body {
+html, body {
   height: 100%;
   margin: 0;
   padding: 0;
@@ -17,7 +17,6 @@ body {
   flex-direction: column;
 }
 
-/* 只有這樣 height:20% 才合法 */
 .module__item {
   height: 20%;
   display: flex;
