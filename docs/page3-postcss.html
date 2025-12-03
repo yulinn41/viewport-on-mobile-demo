@@ -51,25 +51,33 @@
 
   <!-- Debug Script -->
   <script>
-    function updateDebug() {
-      const panel = document.getElementById("debug-panel");
+  function updateDebug() {
+    const panel = document.getElementById("debug-panel");
+    const moduleEl = document.querySelector(".module");
+    const items = document.querySelectorAll(".module__item");
 
-      const moduleEl = document.querySelector('.module');
+    let itemsInfo = "";
+    items.forEach((item, i) => {
+      itemsInfo += `<div>item ${i+1} height: ${item.offsetHeight}px</div>`;
+    });
 
-      panel.innerHTML = `
-        <div><b>Safari Debug Info</b></div>
-        <div>innerHeight: ${window.innerHeight}px</div>
-        <div>clientHeight: ${document.documentElement.clientHeight}px</div>
-        <div>screen.height: ${screen.height}px</div>
-        <div>screen.availHeight: ${screen.availHeight}px</div>
-        <div>module.offsetHeight: ${moduleEl ? moduleEl.offsetHeight : 'N/A'}px</div>
-        <div>viewport meta: ${document.querySelector('meta[name=viewport]')?.content}</div>
-      `;
-    }
+    panel.innerHTML = `
+      <div><b>Safari Debug Info</b></div>
+      <div>innerHeight: ${window.innerHeight}px</div>
+      <div>clientHeight: ${document.documentElement.clientHeight}px</div>
+      <div>screen.height: ${screen.height}px</div>
+      <div>module.offsetHeight: ${moduleEl ? moduleEl.offsetHeight : 'N/A'}px</div>
+      <div>viewport meta: ${document.querySelector('meta[name=viewport]')?.content}</div>
+      <br>
+      <div><b>Item Heights</b></div>
+      ${itemsInfo}
+    `;
+  }
 
-    updateDebug();
-    window.addEventListener("resize", updateDebug);
-  </script>
+  updateDebug();
+  window.addEventListener("resize", updateDebug);
+</script>
+
 
 </body>
 </html>
