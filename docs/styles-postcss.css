@@ -22,12 +22,8 @@ html, body {
 }
 
 .module__item {
-  height: 20%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  flex: 1;   /* 等分高度 */
 }
-
 .module__item:nth-child(odd) {
   background: #fff;
   color: #008e61;
