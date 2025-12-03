@@ -1,35 +1,46 @@
-html, body {
+hhtml, body {
   height: 100%;
   margin: 0;
   padding: 0;
 }
 
-
-.module {
-  height: 100vh;
-  width: 100%;     /* ← 重要！要覆蓋 max-width */
-  max-width: none; /* ← 防止舊版本 cache */
-  margin: 0 auto;
-    display: flex;
-  flex-direction: column;   /* ★★ 必加：讓 item 等比分配 */
+body {
+  display: flex;
+  background: #333; 
+  font-family: sans-serif; 
 }
 
-@supports (-webkit-touch-callout: none) {
+.module {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
 
+/* 只有這樣 height:20% 才合法 */
+.module__item {
+  height: 20%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Safari 補丁（PostCSS 會插入） */
+@supports (-webkit-touch-callout: none) {
+  html, body {
+    height: -webkit-fill-available;
+  }
   .module {
     height: -webkit-fill-available;
   }
 }
 
-.module__item {
-  flex: 1;   /* 等分高度 */
-}
 .module__item:nth-child(odd) {
   background: #fff;
   color: #008e61;
 }
 
 .module__item:nth-child(even) {
-  background: #F73859;
+  background: #750013;
   color: #F1D08A;
 }
