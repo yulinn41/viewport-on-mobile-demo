@@ -10,6 +10,8 @@ html, body {
   width: 100%;     /* ← 重要！要覆蓋 max-width */
   max-width: none; /* ← 防止舊版本 cache */
   margin: 0 auto;
+    display: flex;
+  flex-direction: column;   /* ★★ 必加：讓 item 等比分配 */
 }
 
 @supports (-webkit-touch-callout: none) {
@@ -28,7 +30,7 @@ html, body {
 
 .module__item:nth-child(odd) {
   background: #fff;
-  color: #F73859;
+  color: #008e61;
 }
 
 .module__item:nth-child(even) {
