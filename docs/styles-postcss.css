@@ -1,5 +1,7 @@
 .module {
-  height: 100vh; /* PostCSS 會把它改寫 */
+  height: 100vh; /* PostCSS 會處理它 */
+  margin: 0 auto;
+  max-width: 30%;
 }
 
 @supports (-webkit-touch-callout: none) {
@@ -7,6 +9,13 @@
   .module {
     height: -webkit-fill-available;
   }
+}
+
+.module__item {
+  height: 20%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .module__item:nth-child(odd) {
@@ -17,11 +26,4 @@
 .module__item:nth-child(even) {
   background: #F73859;
   color: #F1D08A;
-}
-
-.module__item {
-  height: 20%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
