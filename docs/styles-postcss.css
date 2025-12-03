@@ -5,7 +5,6 @@ html, body {
 }
 
 body {
-  display: flex;
   background: #333; 
   font-family: sans-serif; 
 }
@@ -18,7 +17,7 @@ body {
 }
 
 .module__item {
-  height: 20%;
+  flex: 1; /* 讓五個元素平均分配 .module 的高度 */
   display: flex;
   align-items: center;
   justify-content: center;
